@@ -67,7 +67,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add app/values.yaml
           cat  app/values.yaml
-          git commit -m "Update image tag to ${{ env.COMMIT_HASH }}"
+          git commit -m "Update image tag to  ${{ needs.build.outputs.commit_hash }}"
           git push
 
 
