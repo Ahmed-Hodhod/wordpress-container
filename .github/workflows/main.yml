@@ -25,8 +25,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context:  .        
+          context:  .
           file: ./Dockerfile
-
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/wordpress:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/wordpress:${{ env.COMMIT_HASH }}
