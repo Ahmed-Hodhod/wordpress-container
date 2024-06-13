@@ -53,8 +53,7 @@ jobs:
 
       - name: Update values.yaml
         run: |
-          COMMIT_HASH=${{ needs.build.outputs.commit_hash }}
-          sed -i 's/tag:.*/tag:${COMMIT_HASH}/g' ABI_GitOps_K8S/app/values.yaml
+          sed -i 's/tag:.*/tag:${{ needs.build.outputs.commit_hash }}/g' ABI_GitOps_K8S/app/values.yaml
           cat ABI_GitOps_K8S/app/values.yaml
 
 
