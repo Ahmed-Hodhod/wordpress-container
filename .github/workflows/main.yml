@@ -42,7 +42,7 @@ jobs:
       - name: Checkout values repository
         uses: actions/checkout@v3
         with:
-          repository: github.com/Ahmed-Hodhod/ABI_GitOps_K8S
+          repository: Ahmed-Hodhod/ABI_GitOps_K8S
           token:   ${{ secrets._GITHUB_TOKEN }}
           path: ABI_GitOps_K8S
 
