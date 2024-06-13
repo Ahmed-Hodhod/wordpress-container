@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      commit_hash: ${{ steps.commit_hash.outputs.commit_hash }}
+
 
     steps:
       - name: Checkout repository
