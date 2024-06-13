@@ -42,21 +42,22 @@ jobs:
       - name: Checkout values repository
         uses: actions/checkout@v3
         with:
-          repository: Ahmed-Hodhod/ABI_GitOps_K8S
+          repository: github.com/Ahmed-Hodhod/ABI_GitOps_K8S
           token:   ${{ secrets._GITHUB_TOKEN }}
           path: ABI_GitOps_K8S
 
       - name: Update values.yaml
         run: |
+          echo image: ${DOCKER_HUB_USERNAME}/wordpress:${{ env.COMMIT_HASH }}
           sed -i "s|image: .*|image: ${DOCKER_HUB_USERNAME}/wordpress:${{ env.COMMIT_HASH }}|" ABI_GitOps_K8S/app/values.yaml
 
 
       - name: Commit and push changes
         run: |
-          ls 
           cd ABI_GitOps_K8S
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add app/values.yaml
+          cat  app/values.yaml
           git commit -m "Update image tag to ${{ env.COMMIT_HASH }}"
           git push
