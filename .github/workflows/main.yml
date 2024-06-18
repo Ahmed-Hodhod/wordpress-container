@@ -88,6 +88,7 @@ jobs:
 
       - name: Update values.yaml
         run: |
+          ls
           sed -i "s|image: ahmedhodhod1/wordpress:.*|image: ahmedhodhod1/wordpress:${{ needs.build.outputs.commit_hash }}|g" overlays/*/kustomization.yaml
 
 
