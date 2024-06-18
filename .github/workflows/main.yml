@@ -79,13 +79,13 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           # Update the image tag in both overlays
-          sed -i "s|image: ahmedhodhod1/wordpress:.*|image: ahmedhodhod1/wordpress:${{ needs.build.outputs.commit_hash }}|g" overlays/*/kustomization.yaml
+          sed -i "s|image: ahmedhodhod1/wordpress:.*|image: ahmedhodhod1/wordpress:${{ needs.build.outputs.commit_hash }}|g" overlays/prod/kustomization.yaml
           
           # Display changes for verification
-          cat overlays/*/kustomization.yaml
+          cat overlays/prod/kustomization.yaml
           
           # Commit and push changes
-          git add overlays/*/kustomization.yaml
+          git add overlays/prod/kustomization.yaml
           git commit -m "Update image tag to ${{ needs.build.outputs.commit_hash }}"
           git push
 
