@@ -86,13 +86,14 @@ jobs:
           ref: kustomize
 
 
-      - name: Update values.yaml
+      - name: Update kustomizations 
         run: |
           ls
+          cd ABI_GitOps_K8S
           sed -i "s|image: ahmedhodhod1/wordpress:.*|image: ahmedhodhod1/wordpress:${{ needs.build.outputs.commit_hash }}|g" overlays/*/kustomization.yaml
 
 
-      - name: Commit and push changes to helm application 
+      - name: Commit and push changes to kustomize application 
         run: |
           cd ABI_GitOps_K8S
           git config --global user.name "github-actions[bot]"
