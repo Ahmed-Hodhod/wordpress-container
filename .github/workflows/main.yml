@@ -60,7 +60,7 @@ jobs:
           cat ABI_GitOps_K8S/app/values.yaml
 
 
-      - name: Commit and push changes
+      - name: Commit and push changes to helm application 
         run: |
           cd ABI_GitOps_K8S
           git config --global user.name "github-actions[bot]"
@@ -68,6 +68,25 @@ jobs:
           git add app/values.yaml
           cat  app/values.yaml
           git commit -m "Update image tag to  ${{ needs.build.outputs.commit_hash }}"
+          git push
+
+      - name: Commit and push changes to kustomize applications 
+        run: |
+          cd ABI_GitOps_K8S
+          
+          # Set git configuration
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Update the image tag in both overlays
+          sed -i "s|image: ahmedhodhod1/wordpress:.*|image: ahmedhodhod1/wordpress:${{ needs.build.outputs.commit_hash }}|g" overlays/*/kustomization.yaml
+          
+          # Display changes for verification
+          cat overlays/*/kustomization.yaml
+          
+          # Commit and push changes
+          git add overlays/*/kustomization.yaml
+          git commit -m "Update image tag to ${{ needs.build.outputs.commit_hash }}"
           git push
 
 
